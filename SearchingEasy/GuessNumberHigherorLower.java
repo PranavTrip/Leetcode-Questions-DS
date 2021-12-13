@@ -8,7 +8,7 @@ public class GuessNumberHigherorLower {
         int start=1;
         int end=n;
         int mid=start+(end-start)/2;
-        int ans=guess(mid);
+        int ans=(mid);
         while (start<=end){
 
             if(ans==n){
