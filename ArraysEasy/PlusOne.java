@@ -4,26 +4,21 @@ import java.util.Arrays;
 
 public class PlusOne {
     public static void main(String[] args) {
-        int[] digits = {9,8,7,6,5,4,3,2,1,0};
+        int[] digits = {9,9};
         System.out.println(Arrays.toString(plusOne(digits)));
     }
 
     public static int[] plusOne(int[] digits) {
-
-        int k = 0;
-
-        for (int i = 0; i < digits.length; i++) {
-            k = 10 * k + digits[i];
+        int n = digits.length;
+        for(int i=n-1;i>=0;i--){
+            if(digits[i]<9){
+                digits[i]++;
+                return digits;
+            }
+            digits[i]=0;
         }
-        k++;
-
-
-
-        String newSum = Integer.toString(k);
-        int[] newArray = new int[newSum.length()];
-        for (int i = 0; i < newArray.length; i++) {
-            newArray[i] = newSum.charAt(i) - '0';
-        }
+        int [] newArray=new int[n+1];
+        newArray[0]=1;
         return newArray;
     }
 }
