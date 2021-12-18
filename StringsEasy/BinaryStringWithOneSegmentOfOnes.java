@@ -8,17 +8,17 @@ public class BinaryStringWithOneSegmentOfOnes {
 
     public static boolean checkOnesSegment(String s) {
         int i =0;
-        boolean found = false;
+        boolean flag = false;
         while(i<s.length()){
             while(i< s.length() && s.charAt(i)=='1'){
                 i++;
-                if(found){
+                if(flag){
                     return false;
                 }
             }
-            found = true;
+            flag = true;
             i++;
         }
-        return found;
+        return flag;
     }
 }
