@@ -1,53 +1,41 @@
 package com.Leetcode.ArraysEasy;
 
 import java.util.HashSet;
+import java.util.Set;
 
 public class ValidSudoku {
     public static void main(String[] args) {
 
     }
     public static boolean isValidSudoku(char[][] board) {
-        return validRow(board,9)&& validColumn(board,9)&& validBox(board,6,6);
-    }
-    public static boolean validRow(char[][] board,int row){
-        HashSet<Character> hs=new HashSet<>();
-        for(int i=0;i< 9;i++){
-            if(hs.contains(board[row][i])){
-                return false;
-            }
-            if(board[row][i]!='.'){
-                hs.add(board[row][i]);
-            }
+        int n = board.length;
+        Set<Integer>[] rows = new Set[n];
+        Set<Integer>[] cols = new Set[n];
+        Set<Integer>[] blocks = new Set[n];
 
+        for(int i = 0; i < n; i++) {
+            rows[i] = new HashSet<Integer>();
+            cols[i] = new HashSet<Integer>();
+            blocks[i] = new HashSet<Integer>();
         }
-        return true;
-    }
-    public static boolean validColumn(char[][] board,int col){
-        HashSet<Character> hs=new HashSet<>();
-        for(int i=0;i< 9;i++){
-            if(hs.contains(board[i][col])){
-                return false;
-            }
-            if(board[i][col]!='.'){
-                hs.add(board[i][col]);
-            }
 
-        }
-        return true;
-    }
-    public static boolean validBox(char[][] board,int r,int c){
-        HashSet<Character> hs=new HashSet<>();
-        for(int i=0;i<3;i++){
-            for(int j=0;j<3;j++){
-                char ch=board[i+r][j+c];
-                if(hs.contains(ch)){
-                    return false;
-                }
-                if(ch!='.'){
-                    hs.add(ch);
-                }
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+
+                if (board[i][j] == '.') continue;
+                int k = 3 * (i /3) + (j / 3);
+
+                int num = board[i][j] - '0';
+                if (rows[i].contains(num)) return false;
+                if (cols[j].contains(num)) return false;
+                if (blocks[k].contains(num)) return false;
+
+                rows[i].add(num);
+                cols[j].add(num);
+                blocks[k].add(num);
             }
         }
         return true;
     }
+
 }
