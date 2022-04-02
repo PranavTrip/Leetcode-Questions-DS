@@ -2,25 +2,33 @@ package com.Leetcode.StringsEasy;
 
 public class ValidPalindrome2 {
     public static void main(String[] args) {
-        String s ="NitIn";
+        String s = "abcb";
         System.out.println(validPalindrome(s));
     }
 
     public static boolean validPalindrome(String s) {
-        String str = s.toLowerCase();
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < str.length(); i++) {
-            char ch = str.charAt(i);
-            if (isValidCharacter(ch)) {
-                sb.append(ch);
-            }
-        }
-        String st1 = sb.toString();
-        String st2 = sb.reverse().toString();
-        return st1.equals(st2);
+       int i=0;
+       int j=s.length()-1;
+       while (i<j){
+           if(s.charAt(i)!=s.charAt(j)){
+              return (checkPalindrome(s,i,j-1)||checkPalindrome(s,i+1,j));
+           }
+           i++;
+           j--;
+       }
+       return true;
+
     }
 
-    public static boolean isValidCharacter(char ch) {
-        return ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'z'));
+
+    public static boolean checkPalindrome(String s,int i,int j){
+        while (i<j){
+            if(s.charAt(i)!=s.charAt(j)){
+                return false;
+            }
+            i++;
+            j--;
+        }
+        return true;
     }
 }
