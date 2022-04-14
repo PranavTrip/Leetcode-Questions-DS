@@ -6,20 +6,15 @@ public class SmallestLetterGreaterThanTarget {
         System.out.println(nextGreatestLetter(letters,'c'));
     }
     public static char nextGreatestLetter(char[] letters, char target) {
-        int start=0;
-        int end=letters.length;
-        while (start<=end){
-            int mid=start+(end-start)/2;
-            if(letters[mid]==target){
-                return letters[mid];
-            }
-            else if(letters[mid]>target){
-                end=mid-1;
-            }
-            else{
-                start=mid+1;
-            }
+        int left = 0;
+        int right = letters.length - 1;
+        while ( left < right ){
+            int mid = ( left + right ) >>> 1;
+            if ( letters[mid] > target )
+                right = mid;
+            else
+                left = mid+1;
         }
-        return letters[start];
+        return letters[right] > target ? letters[right] : letters[0];
     }
 }
