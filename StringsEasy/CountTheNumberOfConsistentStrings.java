@@ -1,5 +1,7 @@
 package com.Leetcode.StringsEasy;
 
+import java.util.*;
+
 public class CountTheNumberOfConsistentStrings {
     public static void main(String[] args) {
         String allowed="ab";
@@ -7,17 +9,22 @@ public class CountTheNumberOfConsistentStrings {
         System.out.println(countConsistentStrings(allowed,words));
     }
     public static int countConsistentStrings(String allowed, String[] words) {
-        int count=0;
-
-        for(int j=0;j<words.length;j++) {
-            String s=words[j];
-            for (int i = 0; i < s.length(); i++) {
-                if (allowed.contains(String.valueOf(s.charAt(i)))) {
-                    count++;
+        List<Boolean> consistentTable = new ArrayList<>();
+        int count = 0;
+        for(int i=0; i<words.length; i++){
+            boolean output = true;
+            for(int j=0; j<words[i].length(); j++){
+                if(!allowed.contains(String.valueOf(words[i].charAt(j)))){
+                    output = false;
                     break;
                 }
             }
+            consistentTable.add(output);
         }
+
+        for(Boolean bool: consistentTable)
+            if(bool) count++;
+
         return count;
     }
 }
