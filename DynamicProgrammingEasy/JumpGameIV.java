@@ -14,7 +14,7 @@ public class JumpGameIV {
             if(list.getFirst() < i-k) list.removeFirst();
 
             nums[i] += nums[list.getFirst()];
-            
+
             while(!list.isEmpty() && nums[list.getLast()] <= nums[i]) list.removeLast();
             list.addLast(i);
         }
