@@ -11,7 +11,7 @@ public class HouseRobber {
     public static int rob(int[] nums,int n) {
         int[] dp=new int[nums.length];
         Arrays.fill(dp,-1);
-        return tabulation(nums,dp,n);
+        return spaceOptimisation(nums,n);
     }
     public static int solve(int ind,int[] nums,int[]dp,int n){
         if(ind==0){
@@ -38,5 +38,20 @@ public class HouseRobber {
             dp[i]=Math.max(pick,notPick);
         }
         return dp[nums.length-1];
+    }
+    public static int spaceOptimisation(int[] nums,int n){
+        int prev=nums[0];
+        int prev2=0;
+        for(int i=1;i< nums.length;i++){
+            int pick=nums[i];
+            if(i>1){
+                pick+=prev2;
+            }
+            int notPick=prev;
+            int curr_i=Math.max(pick,notPick);
+            prev2=prev;
+            prev=curr_i;
+        }
+        return prev;
     }
 }
